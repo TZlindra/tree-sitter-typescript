@@ -22,13 +22,6 @@ include(GNUInstallDirs)
 set(TREE_SITTER_TYPESCRIPT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
 macro(add_parser name)
-    add_custom_command(OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/src/parser.c"
-                       DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/grammar.json"
-                       COMMAND "${TREE_SITTER_CLI}" generate src/grammar.json
-                                --abi=${TREE_SITTER_ABI_VERSION}
-                       WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-                       COMMENT "Generating parser.c")
-
     add_library(tree-sitter-${name}
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/parser.c"
                 "${CMAKE_CURRENT_SOURCE_DIR}/src/scanner.c")
